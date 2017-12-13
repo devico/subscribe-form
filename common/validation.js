@@ -1,12 +1,12 @@
-function validate (username, email) {
-	return ({
-    username: validateUsername(username),
-    email: validateEmail(email)
+function validate (data) {
+  return ({
+    username: validateUsername(data.username),
+    email: validateEmail(data.email)
   })
 }
 
 let validateEmail = (email) => {
-	return (email.length > 0 && email.match(/\S+@\S+\.\S+/) != null) ? true : false
+  return (email.length > 0 && email.match(/\S+@\S+\.\S+/) != null) ? true : false
 }
 
 let validateUsername = (username) => {

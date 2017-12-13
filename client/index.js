@@ -7,11 +7,13 @@ let form = {
 }
 
 let handleKeyup = () => {
-  let valid = validate(form.username.value, form.email.value)
+  let username = form.username.value,
+      email = form.email.value
+  let valid = validate({username, email})
 
-	form.usernameError.innerHTML = valid.username ? "" : "* Name must have only letters"
-	form.emailError.innerHTML = valid.email ? "" : "* Invalid email address"
-	form.submit.disabled = valid.username && valid.email ? false : true
+  form.usernameError.innerHTML = valid.username ? "" : "* Name must have only letters"
+  form.emailError.innerHTML = valid.email ? "" : "* Invalid email address"
+  form.submit.disabled = valid.username && valid.email ? false : true
 }
 
 window.addEventListener('keyup', _.debounce(handleKeyup, 1000))
