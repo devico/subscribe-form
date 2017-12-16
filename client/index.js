@@ -10,8 +10,7 @@ let handleKeyup = () => {
   let username = form.username.value,
       email = form.email.value
   let valid = window.validate({username, email})
-  console.log(valid)
-
+  
   if (_.filter(valid, Boolean).length != Object.keys(valid).length) {
     form.usernameError.innerHTML = valid.username ? "" : "* Name must have only letters"
     form.emailError.innerHTML = valid.email ? "" : "* Invalid email address"
