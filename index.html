@@ -18,7 +18,14 @@
   </form>
   
   <script src="./public/vendors/underscore/underscore.js"></script>
-  <script src="./client/index.js"></script>
+  <script>
+    let module = {
+      set exports (val) {
+        Object.assign(window, val)
+      } 
+    }
+  </script>
   <script src="./common/validation.js"></script>
+  <script src="./client/index.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@ const http = require('http')
 const url = require('url')
 const fs = require('fs')
 const qs = require('querystring')
-let validate = require('../server/validation')
+const validate = require('../common/validation')
 
 http.createServer(function (req, res) {
   switch (req.url) {
@@ -14,7 +14,9 @@ http.createServer(function (req, res) {
         })
         req.on('end', function () {
           let data = qs.parse(body)
-          let valid = validate(data.username, data.email)
+          let username = data.username
+          let email = data.email
+          let valid = validate({username, email})
           res.writeHead(200, {'Content-Type': 'application/json'})
           if (valid) {
             res.end(JSON.stringify({ 'status': 'subscribed' }))
