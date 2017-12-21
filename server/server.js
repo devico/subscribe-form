@@ -1,11 +1,12 @@
+const P = require("path")
 const http = require('http')
 const url = require('url')
 const qs = require('querystring')
 const finalhandler = require('finalhandler')
 const serveStatic = require('serve-static')
-const validate = require('../common/validation')
+const validate = require('../public/common/validation')
 
-const serve = serveStatic('../public', {'index': ['index.html', 'index.htm']})
+const serve = serveStatic(P.resolve('./public'))
 
 const server = http.createServer(function onRequest(req, res) {
   if (req.method == "POST" && req.url == "/subscribe") {
@@ -25,7 +26,7 @@ const server = http.createServer(function onRequest(req, res) {
         res.end(JSON.stringify({ 'status': 'did not subscribe' }))
       }
     })
-  } else if (req.method == "GET" && req.url == "/") {
+  } else if (req.method == "GET" && (req.url == "/" || req.url.startsWith("/vendors") || req.url.startsWith("/common") || req.url.startsWith("/client"))) {
     serve(req, res, finalhandler(req, res))
   } else {
     res.writeHead(404, {'Content-Type': 'text/html'})
@@ -33,4 +34,6 @@ const server = http.createServer(function onRequest(req, res) {
   }
 })
 
-server.listen(8000)
+server.listen(8000, () => {
+  console.log("Listening on 8000")
+})
