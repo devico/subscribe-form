@@ -1,4 +1,5 @@
 function validate (data) {
+	console.log(data.username)
   return ({
     username: validateUsername(data.username),
     email: validateEmail(data.email)
